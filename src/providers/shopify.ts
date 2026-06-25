@@ -48,14 +48,19 @@ export class ShopifyProvider implements EcommerceProvider {
       const parsed = JSON.parse(text);
       return (parsed.products || []).map(
         (p: Record<string, unknown>): EcommerceProduct => {
-          const priceRange = p.price_range as { currency: string; min: string } | undefined;
+          const priceRange = p.price_range as { min: { amount: number; currency: string }; max: { amount: number; currency: string } } | undefined;
+          const desc = p.description as { html?: string } | string | undefined;
+          const descText = typeof desc === 'string' ? desc : desc?.html || '';
+          const media = p.media as Array<{ url: string }> | undefined;
+          const amount = priceRange?.min?.amount;
+          const cents = typeof amount === 'number' ? (amount / 100).toFixed(2) : '';
           return {
-            id: (p.product_id as string) || '',
+            id: (p.id as string) || '',
             title: (p.title as string) || '',
-            description: (p.description as string) || '',
-            price: priceRange ? `${priceRange.min}` : '',
-            currency: priceRange?.currency || 'USD',
-            imageUrl: (p.image_url as string) || '',
+            description: descText,
+            price: cents,
+            currency: priceRange?.min?.currency || 'USD',
+            imageUrl: media?.[0]?.url || '',
             url: (p.url as string) || '',
             available: true,
           };
