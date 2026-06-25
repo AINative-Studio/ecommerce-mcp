@@ -21,6 +21,7 @@
 
 export { EcommerceMCP } from './ecommerce-mcp';
 export { ShopifyProvider } from './providers/shopify';
+export { ZeroCommerceProvider } from './providers/zerocommerce';
 export type {
   EcommerceConfig,
   EcommerceProduct,

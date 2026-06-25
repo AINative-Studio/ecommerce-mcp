@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-mcp",
-  "version": "1.0.0",
-  "description": "Universal MCP client for ecommerce platforms — connect AI agents to Shopify, WooCommerce, BigCommerce, and more. Product search, cart management, checkout, and order tracking via Model Context Protocol.",
+  "version": "1.1.0",
+  "description": "Universal MCP client for ecommerce platforms — connect AI agents to Shopify, ZeroCommerce, WooCommerce, BigCommerce, and more. Product search, cart management, checkout, and order tracking via Model Context Protocol.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -10,11 +10,12 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./shopify": {
+      "types": "./dist/shopify.d.ts",
       "import": "./dist/shopify.mjs",
       "require": "./dist/shopify.js"
     }

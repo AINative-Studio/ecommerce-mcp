@@ -2,10 +2,11 @@
  * EcommerceMCP — Universal MCP client for ecommerce platforms
  *
  * Auto-detects platform from domain and connects to the right MCP endpoint.
- * Currently supports Shopify, with WooCommerce and BigCommerce coming soon.
+ * Supports Shopify and ZeroCommerce, with WooCommerce and BigCommerce coming soon.
  */
 
 import { ShopifyProvider } from './providers/shopify';
+import { ZeroCommerceProvider } from './providers/zerocommerce';
 import type {
   EcommerceConfig,
   EcommerceProduct,
@@ -85,6 +86,8 @@ export class EcommerceMCP {
 function detectPlatform(domain: string): Platform {
   if (domain.includes('myshopify.com') || domain.includes('shopify'))
     return 'shopify';
+  if (domain.includes('zerocommerce') || domain.includes('ainative'))
+    return 'custom';
   if (domain.includes('woocommerce') || domain.includes('wordpress'))
     return 'woocommerce';
   if (domain.includes('bigcommerce')) return 'bigcommerce';
@@ -98,9 +101,10 @@ function createProvider(
   switch (platform) {
     case 'shopify':
       return new ShopifyProvider(config.shopDomain, config.mcpEndpoint);
+    case 'custom':
+      return new ZeroCommerceProvider(config.shopDomain, config.apiKey);
     case 'woocommerce':
     case 'bigcommerce':
-      // Coming soon — fall through to Shopify for now
       console.warn(
         `${platform} support coming soon. Using Shopify provider as fallback.`,
       );
