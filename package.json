@@ -1,0 +1,77 @@
+{
+  "name": "ecommerce-mcp",
+  "version": "1.0.0",
+  "description": "Universal MCP client for ecommerce platforms — connect AI agents to Shopify, WooCommerce, BigCommerce, and more. Product search, cart management, checkout, and order tracking via Model Context Protocol.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ecommerce-mcp": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./shopify": {
+      "import": "./dist/shopify.mjs",
+      "require": "./dist/shopify.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ecommerce",
+    "shopify",
+    "woocommerce",
+    "bigcommerce",
+    "ai",
+    "agent",
+    "shopping",
+    "agentic-commerce",
+    "commerce-mcp",
+    "ai-shopping-assistant",
+    "product-search",
+    "cart",
+    "checkout",
+    "storefront",
+    "ainative",
+    "zeromemory",
+    "llm",
+    "claude",
+    "gpt",
+    "chatbot"
+  ],
+  "author": "AINative Studio <dev@ainative.studio>",
+  "license": "MIT",
+  "homepage": "https://ainative.studio/ecommerce",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AINative-Studio/ecommerce-mcp"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "^4.0.0",
+    "@vitest/coverage-v8": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
